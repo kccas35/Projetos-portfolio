@@ -19,7 +19,6 @@ def listar_categorias(dados):
     return categorias
 
 
-
 def listar_por_categoria(dados, categoria):
     
     lista_categorias = []
@@ -36,7 +35,6 @@ def produto_mais_caro(dados, categoria):
     preco_caro = float(dados[0]['preco'])
 
     for elemento in dados:
-        
         if float(elemento['preco']) > preco_caro and elemento['categoria'] == categoria:
             preco_caro = float(elemento['preco'])
             produto_caro = elemento
@@ -73,7 +71,7 @@ def top_10_baratos(dados):
 
         menor = sorted(dados, key = lambda x: [float(x['preco'])])        
        
-    return  menor
+    return menor
 
 
 def linha(tam = 42):
@@ -117,6 +115,7 @@ def menu(dados):
         menu_opcoes()
         opcao_usuario = int(input('\nDigite a opção desejada: '))
         linha()
+        
                        
         if opcao_usuario == 1:
 
@@ -133,10 +132,7 @@ def menu(dados):
             print(f'\n{lista_opcoes[opcao_usuario].center(80).upper()}') 
             categoria = str(input('\nDigite a categoria desejada: ')).lower()
             linha()
-            listagem_por_categorias = listar_por_categoria(dados, categoria)
-
-            for i in range(0, len(listagem_por_categorias)):
-                print(f'\nID: {listagem_por_categorias[i]["id"]} ................... PREÇO: R$ {listagem_por_categorias[i]["preco"]} {listagem_por_categorias[i]["categoria"]}')
+            
 
         elif opcao_usuario == 3:   
 
