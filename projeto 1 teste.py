@@ -17,11 +17,10 @@ def listar_categorias(dados):
 
 def inserir_categoria(dados):
     categorias = listar_categorias(dados)
-    categoria = input('\n Digite qual será a categoria: ').lower()
-
+    categoria = input('\n Digite qual será a categoria: ').replace(" ", '_').lower()
     while categoria not in categorias:
-        categoria = input(f' \n {decor()} \n INVÁLIDO! \n Tente novamente: ').lower()
-    return categoria
+        categoria = input(f' \n {decor()} \n INVÁLIDO! \n Tente novamente: ').replace(" ", '_').lower()
+    return categoria.replace(" ", '_').lower()
 
 def listar_por_categoria(dados, categoria):
     lista_categorias = []
@@ -54,13 +53,13 @@ def decor(tam = 43):
     return '=' * tam
 
 def compute(opcao):
-    resultado = 0
-
+    resultado = ''
+    
     if opcao == '1':
-        categorias = sorted(listar_categorias(dados))
         print(f'\n Ok! Aqui estão as categorias: \n')
+        categorias = sorted(listar_categorias(dados))
         for i in range(0, len(categorias)):
-            resultado = print(f'\n {i + 1} - {str(categorias[i].capitalize())}')
+            resultado = print(f'\n {i + 1} - {str(categorias[i].upper().replace("_", " "))}')
         
     elif opcao == '2':
         decor()
@@ -69,57 +68,62 @@ def compute(opcao):
         print(f'\n \n Para a categoria escolhida: {categoria.upper()}, aqui estão os respectivos produtos: \n')
         listando = listar_por_categoria(dados, categoria)
         for i in range(0, len(listando)):
-            resultado =  print(f' {i + 1} - CATEGORIA: {categoria.upper()} | ID: {listando[i]["id"]} | PREÇO: R$ {listando[i]["preco"]} \n')
+            resultado =  print(f' {i + 1} - CATEGORIA: {categoria.upper().replace("_", " ")} | ID: {listando[i]["id"]} | PREÇO: R$ {listando[i]["preco"]} \n')
         
     elif opcao == '3':
         decor()
         categoria = inserir_categoria(dados)
         decor()
-        resultado = print(f'\n Para a categoria escolhida "{categoria.upper()}", aqui está o produto mais caro: \n \n {produto_mais_caro(dados, categoria)}')
+        resultado = print(f'\n Para a categoria escolhida "{categoria.upper().replace("_", " ")}", aqui está o produto mais caro: \n \n {produto_mais_caro(dados, categoria)}')
         
     elif opcao == '4':
         decor()
         categoria = inserir_categoria(dados)
         decor()
-        resultado = print(f'\n Para a categoria escolhida "{categoria.upper()}", aqui está o produto mais barato: \n \n {produto_mais_barato(dados, categoria)}')
+        resultado = print(f'\n Para a categoria escolhida "{categoria.upper().replace("_", " ")}", aqui está o produto mais barato: \n \n {produto_mais_barato(dados, categoria)}')
         
     elif opcao == '5':
         print(f'\n Aqui estão os 10 produtos mais caros: \n ')
         for i in range (0, 10):
                 top_10 = top_10_caros(dados)
-                resultado = print(f'\n {i+1} - {top_10[i]}')
+                resultado = print(f'\n {i+1} - ID2: {top_10[i]["id"]} - PREÇO: {top_10[i]["preco"]} - CATEGORIA: {(top_10[i]["categoria"])}')
         
     elif opcao == '6':
         print(f'\n Aqui estão os 10 produtos mais baratos: \n ')
         for i in range (0, 10):
                 top_10_b = top_10_baratos(dados)
-                resultado = print(f'\n {i+1} - {top_10_b[i]}')
-        
+                resultado = print(f'\n {i+1} - ID: {top_10_b[i]["id"]} - PREÇO: {top_10_b[i]["preco"]} - CATEGORIA: {top_10_b[i]["categoria"]}')
+    
     return f'{decor()} \n {resultado} \n {decor()}'
 
 
 def menu(dados):
     print(f"\n {decor()} \n \n Olá! Aqui está o menu: \n")
-    opcao = input("\n 1. Listar categorias"
+    opcao = (input("\n 1. Listar categorias"
                   "\n 2. Listar produtos de uma categoria" 
                   "\n 3. Produto mais caro por categoria" 
                   "\n 4. Produto mais barato por categoria"
                   "\n 5. Top 10 produtos mais caros"
                   "\n 6. Top 10 produtos mais baratos"
-                  "\n 0. Sair \n \n Para utilizar o programa, digite aqui o índice da opção escolhida e dê enter:  ")
+                  "\n 0. Sair \n \n Para utilizar o programa, digite aqui o índice da opção escolhida e dê enter:  "))
     print(f'\n {decor()}')
-    opcoes = ["1", "2", "3", "4", "5", "6", "0"]
+    opcoes = ['1', '2', '3', '4', '5', '6']
     
     while opcao in opcoes:
-        if opcao == '0':
-            print(f'\n Muito bom te ter aqui. \n Fechando programa! \n Até mais. \n{decor()}')
-            return None
-        else:
-            compute(opcao)
-            menu(dados)
-    else:
-        print(f'\n INVÁLIDO! \n Tente novamente:')
+        compute(opcao)
+        opcao = (input("\n 1. Listar categorias"
+                  "\n 2. Listar produtos de uma categoria" 
+                  "\n 3. Produto mais caro por categoria" 
+                  "\n 4. Produto mais barato por categoria"
+                  "\n 5. Top 10 produtos mais caros"
+                  "\n 6. Top 10 produtos mais baratos"
+                  "\n 0. Sair \n \n Para utilizar o programa, digite aqui o índice da opção escolhida e dê enter:  "))
+    if opcao == '0':
+        return None
+    else: 
+        print(f'\n \n {decor()} Inválido. Tente novamente! \n \n ')
         menu(dados)
+        
         
 
 dados = obter_dados()
