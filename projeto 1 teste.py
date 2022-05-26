@@ -37,7 +37,7 @@ def produto_mais_caro(dados, categoria):
 
 def produto_mais_barato(dados, categoria):
     lista_produtos = listar_por_categoria(dados, categoria)
-    barato = sorted(lista_prod_cat, key = lambda x: float(x['preco']), reverse = True)[0]
+    barato = sorted(lista_produtos, key = lambda x: float(x['preco']))[0]
     return barato
 
 def top_10_caros(dados):
@@ -59,12 +59,12 @@ def compute(opcao):
     if opcao == '1':
         categorias = sorted(listar_categorias(dados))
         print(f'\n Ok! Aqui estão as categorias: \n')
-        for i in range(1, len(categorias)- 1):
-            resultado = print(f'\n {i} - {str(categorias[i].capitalize())}')
+        for i in range(0, len(categorias)):
+            resultado = print(f'\n {i + 1} - {str(categorias[i].capitalize())}')
         
     elif opcao == '2':
         decor()
-        categoria = input('\n Digite qual será a categoria: ').lower()
+        categoria = inserir_categoria(dados)
         decor()
         print(f'\n \n Para a categoria escolhida: {categoria.upper()}, aqui estão os respectivos produtos: \n')
         listando = listar_por_categoria(dados, categoria)
@@ -93,7 +93,7 @@ def compute(opcao):
         print(f'\n Aqui estão os 10 produtos mais baratos: \n ')
         for i in range (0, 10):
                 top_10_b = top_10_baratos(dados)
-                resultado = print(f'\n {i+1} - {top_10[i]}')
+                resultado = print(f'\n {i+1} - {top_10_b[i]}')
         
     return f'{decor()} \n {resultado} \n {decor()}'
 
@@ -112,13 +112,13 @@ def menu(dados):
     
     while opcao in opcoes:
         if opcao == '0':
-            print(f'{decor()} \n Muito bom te ter aqui. \n Fechando programa! \n Até mais. \n {decor()}')
-            break
+            print(f'\n Muito bom te ter aqui. \n Fechando programa! \n Até mais. \n{decor()}')
+            return None
         else:
             compute(opcao)
             menu(dados)
     else:
-        print(f'{decor()} \n INVÁLIDO! \n Tente novamente:')
+        print(f'\n INVÁLIDO! \n Tente novamente:')
         menu(dados)
         
 
