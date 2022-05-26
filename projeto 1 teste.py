@@ -19,7 +19,7 @@ def inserir_categoria(dados):
     categorias = listar_categorias(dados)
     categoria = input('\n Digite qual será a categoria: ').replace(" ", '_').lower()
     while categoria not in categorias:
-        categoria = input(f' \n {decor()} \n INVÁLIDO! \n Tente novamente: ').replace(" ", '_').lower()
+        categoria = input(f' \n {decor()} \n \n INVÁLIDO! \n \n Digite a categoria novamente:  ').replace(" ", '_').lower()
     return categoria.replace(" ", '_').lower()
 
 def listar_por_categoria(dados, categoria):
@@ -123,7 +123,7 @@ def menu(dados):
     if opcao == '0':
         return None
     else: 
-        print(f'\n \n {decor()} Inválido. Tente novamente! \n \n ')
+        print(f'\n Inválido. Tente novamente!')
         menu(dados)
         
         
