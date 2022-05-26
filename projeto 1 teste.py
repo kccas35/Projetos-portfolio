@@ -64,36 +64,35 @@ def compute(opcao):
     elif opcao == '2':
         categoria = inserir_categoria(dados)
         print(f'\n {decor()}')
-        print(f'\n \n Para a categoria escolhida: {categoria.upper().replace("_", " ")}, aqui estão os respectivos produtos: \n')
+        print(f'\n Para a categoria escolhida: {categoria.upper().replace("_", " ")}, aqui estão os respectivos produtos: \n')
         print(f' {decor()} \n')
         listando = listar_por_categoria(dados, categoria)
         for i in range(0, len(listando)):
-            resultado =  print(f' {i + 1} - CATEGORIA: {categoria.upper().replace("_", " ")} | ID: {listando[i]["id"]} | PREÇO: R$ {listando[i]["preco"]} \n')
+            resultado =  print(f' {i + 1} - ID: {listando[i]["id"]} | PREÇO: R$ {listando[i]["preco"]} \n')
         
     elif opcao == '3':
         categoria = inserir_categoria(dados)
-        decor()
+        print(f'\n {decor()}')
         mais_caro = produto_mais_caro(dados, categoria)
         resultado = print(f'\n Para a categoria escolhida "{categoria.upper().replace("_", " ")}", aqui está o produto mais caro: \n \n ID: {mais_caro["id"]} - PREÇO: R${mais_caro["preco"]}')
         
     elif opcao == '4':
-        decor()
         categoria = inserir_categoria(dados)
-        decor()
+        print(f'\n {decor()}')
         mais_barato = produto_mais_barato(dados, categoria)
         resultado = print(f'\n Para a categoria escolhida "{categoria.upper().replace("_", " ")}", aqui está o produto mais barato: \n \n ID: {mais_barato["id"]} - PREÇO: R${mais_barato["preco"]}')
         
     elif opcao == '5':
-        print(f'\n Aqui estão os 10 produtos mais caros: \n ')
+        print(f'\n Ok! Aqui estão os 10 produtos mais caros: \n ')
         for i in range (0, 10):
                 top_10 = top_10_caros(dados)
-                resultado = print(f'\n {i+1} - ID: {top_10[i]["id"]} - PREÇO: {top_10[i]["preco"]} - CATEGORIA: {(top_10[i]["categoria"]).upper()}')
+                resultado = print(f'\n {i+1} - ID: {top_10[i]["id"]} - PREÇO: {top_10[i]["preco"]} - CATEGORIA: {(top_10[i]["categoria"]).upper().replace("_", " ")}')
         
     elif opcao == '6':
-        print(f'\n Aqui estão os 10 produtos mais baratos: \n ')
+        print(f'\n Ok! Aqui estão os 10 produtos mais baratos: \n ')
         for i in range (0, 10):
                 top_10_b = top_10_baratos(dados)
-                resultado = print(f'\n {i+1} - ID: {top_10_b[i]["id"]} - PREÇO: {top_10_b[i]["preco"]} - CATEGORIA: {top_10_b[i]["categoria"]}')
+                resultado = print(f'\n {i+1} - ID: {top_10_b[i]["id"]} - PREÇO: {top_10_b[i]["preco"]} - CATEGORIA: {top_10_b[i]["categoria"].upper().replace("_", " ")}')
     
     return f'{decor()} \n {resultado} \n {decor()}'
 
