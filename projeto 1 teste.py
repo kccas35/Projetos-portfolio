@@ -49,8 +49,8 @@ def top_10_baratos(dados):
         baratos = sorted(dados, key = lambda x: [float(x['preco'])])[:10]
         return baratos
      
-def decor(tam = 43):
-    return '=' * tam
+def decor(tam = 50):
+    return '= ' * tam
 
 def compute(opcao):
     resultado = ''
@@ -64,8 +64,7 @@ def compute(opcao):
     elif opcao == '2':
         categoria = inserir_categoria(dados)
         print(f'\n {decor()}')
-        print(f'\n Para a categoria escolhida: {categoria.upper().replace("_", " ")}, aqui estão os respectivos produtos: \n')
-        print(f' {decor()} \n')
+        print(f'\n Para a categoria escolhida: {categoria.upper().replace("_", " ")}, aqui estão os respectivos produtos: \n \n')
         listando = listar_por_categoria(dados, categoria)
         for i in range(0, len(listando)):
             resultado =  print(f' {i + 1} - ID: {listando[i]["id"]} | PREÇO: R$ {listando[i]["preco"]} \n')
